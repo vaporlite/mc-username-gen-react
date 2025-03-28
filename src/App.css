@@ -61,11 +61,17 @@ html, body {
 }
 
 .button-controls {
-  margin: 3.5rem;
+  margin: 3.5rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
 }
 
 .gen-button {
-  background-color: #305fe0;
+  background-color: rgb(48, 95, 224);
   border-radius: 9px;
   border: transparent;
   color: #fff;
@@ -76,15 +82,50 @@ html, body {
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.gen-button:hover {
+.gen-button:hover:not(:disabled) {
   transform: translateY(-5px);
   box-shadow: 0 4px 15px rgba(30, 58, 138, 0.5);
   background-color: #fff;
   color: #305fe0;
 }
 
-.gen-button:active {
+.gen-button:active:not(:disabled) {
   transform: translateY(2.5px);
+}
+
+.gen-button:disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.clear-all-btn {
+  background-color: transparent;
+  border: 1px solid rgb(48, 95, 224);
+  border-radius: 9px;
+  color: rgb(48, 95, 224);
+  font-weight: normal;
+  font-size: 1.1rem;
+  padding: 15px 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.clear-all-btn:hover:not(:disabled) {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(30, 58, 138, 0.5);
+  background-color: rgb(48, 95, 224, 0.1);
+  transition: all 0.3s ease;
+}
+
+.clear-all-btn:active:not(:disabled) {
+  transform: translateY(2.5px);
+}
+
+.clear-all-btn:disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .gen-results {
