@@ -44,6 +44,7 @@ const App: React.FC = () => {
               text={isGenerating ? "generating" : "generate"} 
             />
             <button className="clear-all-btn" onClick={clearAll} disabled={isGenerating}>
+            <span className="material-icons">delete</span>
               clear all
             </button>
           </div>
