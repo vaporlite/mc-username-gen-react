@@ -12,49 +12,14 @@ const generateRandomUsernames = (count: number) => {
   );
 };
 
-const checkUsernameAvailability = async (username: string) => {
-  try {
-    const headers = {
-      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-      "accept-encoding": "gzip, deflate, br, zstd",
-      "accept-language": "de-DE,de;q=0.6",
-      "priority": "u=0, i",
-      "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
-      "sec-ch-ua-mobile": "?0",
-      "sec-ch-ua-platform": "\"Windows\"",
-      "sec-fetch-dest": "document",
-      "sec-fetch-mode": "navigate",
-      "sec-fetch-site": "none",
-      "sec-fetch-user": "?1",
-      "sec-gpc": "1",
-      "upgrade-insecure-requests": "1",
-      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
-  };
-    const response = await fetch(`${apiUrl}${username}`, { headers });
-    if (response.status === 204) {
-      return false;
-    } else if (response.status === 404) {
-      return true;
-    } else {
-      throw new Error('Unexpected response from API');
-    }
-  } catch (error) {
-    console.error(`Error checking username ${username}:`, error);
-    return false;
-  }
-};
-
 const App: React.FC = () => {
   const [usernames, setUsernames] = useState<string[]>([]);
   const handleGenerate = async () => {
     setUsernames([]);
     const newUsernames = generateRandomUsernames(15);
     for (const username of newUsernames) {
-      const isAvailable: boolean = await checkUsernameAvailability(username); // will return true/false, true == available, false == not available
-      if (isAvailable) {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setUsernames((prev) => [...prev, username]);
-      }
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      setUsernames((prev) => [...prev, username]);
     }
   };
 
@@ -75,9 +40,6 @@ const App: React.FC = () => {
             <p>usernames</p>
           </header>
           <div className="gen-results-list">
-            <div className="gen-results-item">
-              <p>usernames get checked for availability, all usernames below aren't taken.</p>
-            </div>
             <div className="gen-results-item">
               <p>to generate usernames click 'generate usernames'</p>
             </div>
